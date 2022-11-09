@@ -1,14 +1,13 @@
 ﻿namespace CS_Study.Chapter05
 {
-    public enum ChocolateBoiler
+    sealed class ChocolateBoiler
     {
-        INSTANCE
-    }
-    public class ChocolateBoilerExtensions
-    {
+        private ChocolateBoiler() { }
+
+        private static readonly ChocolateBoiler mChocolateBoilerInstance = new ChocolateBoiler();
+
         private bool empty;
         private bool boiled;
-        private ChocolateBoilerExtensions() { }
 
         public void Fill()
         {
