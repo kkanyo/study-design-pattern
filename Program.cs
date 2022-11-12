@@ -4,6 +4,7 @@ using CS_Study.Chapter03;
 using CS_Study.Chapter04;
 using CS_Study.Chapter05;
 using CS_Study.Chapter06;
+using CS_Study.Chapter07_1;
 
 namespace CS_Study
 {
@@ -11,40 +12,27 @@ namespace CS_Study
     {
         static void Main( string[] args )
         {
-            RemoteControl remoteControl = new RemoteControl();
+            Chapter07_1.Duck duck = new Chapter07_1.MallardDuck();
 
-            Light light = new Light( "Living Room" );
-            CeilingFan ceilingFan = new CeilingFan( "Living Room" );
-            Stereo stereo = new Stereo( "Living Room" );
+            Turkey turkey = new WildTurkey();
+            Turkey duckAdapter = new DuckAdapter( duck );
 
-            LightOnCommand lightOn = 
-                new LightOnCommand( light );
-            CeilingFanHighCommand ceilingFanHigh =
-                new CeilingFanHighCommand( ceilingFan );
-            StereoOnWithCDCommand stereoOnWithCD =
-                new StereoOnWithCDCommand( stereo );
+            Console.WriteLine( "Turkey says" );
+            turkey.Gobble();
+            turkey.Fly();
 
-            LightOffCommand lightOff =
-                new LightOffCommand( light );
-            CeilingFanHighCommand ceilingFanOff =
-                new CeilingFanHighCommand( ceilingFan );
+            Console.WriteLine( "Duck says" );
+            TestDuck( duck );
 
-            Command[] partyOn = 
-                { lightOn, ceilingFanHigh, stereoOnWithCD };
-            Command[] partyOff =
-                { lightOff, ceilingFanOff };
+            Console.WriteLine( "Duck adapter says" );
+            duckAdapter.Gobble();
+            duckAdapter.Fly();
+        }
 
-            MacroCommand partyOnMacro = new MacroCommand( partyOn );
-            MacroCommand partyOffMacro = new MacroCommand( partyOff );
-
-            remoteControl.SetCommand( 0, partyOnMacro, partyOffMacro );
-
-            Console.WriteLine( remoteControl );
-            Console.WriteLine( "----- Macro On -----" );
-            remoteControl.OnButtonWasPushed( 0 );
-            Console.WriteLine( "----- Macro Off -----" );
-            remoteControl.OffButtonWasPushed( 0 );
-
+        static void TestDuck(Chapter07_1.Duck duck)
+        {
+            duck.Quack();
+            duck.Fly();
         }
     }
 }
